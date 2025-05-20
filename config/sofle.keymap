@@ -1,4 +1,4 @@
-/* ---- includes must be first ---- */
+/* ---------- include FIRST ---------- */
 #include <dt-bindings/zmk/pointing.h>
 
  / {
@@ -11,28 +11,27 @@
     keymap {
         compatible = "zmk,keymap";
 
-        /* ========== 0 · BASE ========== */
+        /* 0 ── BASE ───────────────────────── */
         base_layer {
             label = "BASE";
             bindings = <
             /* Row 1 */ &kp Q  &kp W  &kp E  &kp R  &kp T     &kp Y  &kp U  &kp I  &kp O  &kp P
             /* Row 2 */ &kp A  &kp S  &kp D  &kp F  &kp G     &kp H  &kp J  &kp K  &kp L  &kp SEMI
             /* Row 3 */ &kp Z  &kp X  &kp C  &kp V  &kp B     &kp N  &kp M  &kp COMMA &kp DOT &kp SLASH
-            /* Thumb  */              &kp SPACE  &mo _MOUSE   &kp ENTER  &kp BSPC
+            /* Thumbs */              &kp SPACE  &mo _MOUSE   &kp ENTER  &kp BSPC
             >;
         };
 
-        /* ========== 1 · MOUSE ========== */
+        /* 1 ── MOUSE ──────────────────────── */
         mouse_layer {
             label = "MOUSE";
             bindings = <
-            /* Row 1: arrow-shaped cursor moves + clicks */
-            &mmv MOVE_LEFT  &mmv MOVE_UP    &mkp LCLK   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp RCLK    &none &none &none &none
-            /* Row 2: scroll wheel */
-            &none          &msc SCRL_UP     &msc SCRL_DOWN  &none        &none           &none        &none &none &none &none
-            /* rest unused */
+            /* Cursor arrows (-25 px / 25 px) + clicks */
+            &mmv -25  0   &mmv  0 -25   &mkp LCLK   &mmv  0  25   &mmv 25  0   &mkp RCLK   &none &none &none &none
+            /* Remaining rows unused for now */
             &none &none &none &none &none   &none &none &none &none &none
-                              /* thumbs */ &transparent &transparent &transparent &transparent
+            &none &none &none &none &none   &none &none &none &none &none
+                              /* thumbs */  &transparent &transparent &transparent &transparent
             >;
         };
     };
