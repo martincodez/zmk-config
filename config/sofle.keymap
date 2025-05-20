@@ -1,72 +1,28 @@
-/*  Sofle Wireless – ZMK keymap  */
 / {
     compatible = "zmk,keymap";
 
-    /* ── Layer indexes ─────────────────────────── */
+    #include <dt-bindings/zmk/pointing.h>   /* ← NEW */
+
     #define _BASE   0
-    #define _LOWER  1
-    #define _RAISE  2
-    #define _ADJUST 3
-    #define _MOUSE  4
+    #define _MOUSE  1   /* quick demo layer */
 
     keymap {
-        compatible = "zmk,keymap";
-
-        /* ── 0: BASE ───────────────────────────── */
-        base_layer {
-            label = "BASE";
+        base {
             bindings = <
-            /* Row 1 */   &kp Q     &kp W    &kp E    &kp R      &kp T         &kp Y       &kp U      &kp I        &kp O       &kp P
-            /* Row 2 */   &kp A     &kp S    &kp D    &kp F      &kp G         &kp H       &kp J      &kp K        &kp L       &kp SEMI
-            /* Row 3 */   &kp Z     &kp X    &kp C    &kp V      &kp B         &kp N       &kp M      &kp COMMA    &kp DOT     &kp SLASH
-            /* Thumb */   &kp ESC   &kp TAB  &kp SPACE &mo _LOWER &kp ENTER     &kp BSPC    &mo _RAISE &mo _MOUSE
+                &kp Q  &kp W  &kp E  &kp R  &kp T   &kp Y  &kp U  &kp I  &kp O  &kp P
+                &kp A  &kp S  &kp D  &kp F  &kp G   &kp H  &kp J  &kp K  &kp L  &kp SEMI
+                &kp Z  &kp X  &kp C  &kp V  &kp B   &kp N  &kp M  &kp COMMA &kp DOT &kp SLASH
+                               /* thumbs */ &kp SPACE  &mo _MOUSE   &kp ENTER  &kp BSPC
             >;
         };
 
-        /* ── 1: LOWER (symbols/numbers) ────────── */
-        lower_layer {
-            label = "LOWER";
-            bindings = <
-            &kp EXCLAMATION &kp AT       &kp HASH    &kp DOLLAR   &kp PERCENT   &kp CARET   &kp AMPERSAND &kp ASTERISK &kp LPAREN  &kp RPAREN
-            &kp 1           &kp 2        &kp 3       &kp 4        &kp 5         &kp 6       &kp 7         &kp 8         &kp 9        &kp 0
-            &kp LSHIFT      &kp LCTRL    &kp LALT    &kp LGUI     &none         &none       &kp LEFT      &kp DOWN      &kp UP       &kp RIGHT
-            &trans          &trans       &trans      &trans       &trans        &trans      &trans        &mo _MOUSE
-            >;
-        };
-
-        /* ── 2: RAISE (navigation/media) ──────── */
-        raise_layer {
-            label = "RAISE";
-            bindings = <
-            &kp GRAVE   &kp F1    &kp F2   &kp F3    &kp F4   &kp F5   &kp F6   &kp F7   &kp F8   &kp F9
-            &kp HOME    &kp PG_DN &kp PG_UP &kp END  &none    &none    &kp MUTE &kp VOLD &kp VOLU &none
-            &none       &none     &none     &none    &none    &none    &none    &none    &none    &none
-            &trans      &trans    &trans    &trans   &trans   &trans   &trans   &mo _MOUSE
-            >;
-        };
-
-        /* ── 3: ADJUST (system) ───────────────── */
-        adjust_layer {
-            label = "ADJUST";
-            bindings = <
-            &bootloader   &reset        &sys_reset  &none  &none  &none  &none  &none  &none  &none
-            &none         &none         &none       &none  &none  &none  &none  &none  &none  &none
-            &none         &none         &none       &none  &none  &none  &none  &none  &none  &none
-            &trans        &trans        &trans      &trans &trans &trans &trans &mo _MOUSE
-            >;
-        };
-
-        /* ── 4: MOUSE ─────────────────────────── */
         mouse_layer {
             label = "MOUSE";
             bindings = <
-            /* Arrow-shaped cursor movement + clicks */
-            &relative_pointer MOVE_-25_0   &relative_pointer MOVE_0_-25   &mouse_click BTN_LEFT   &relative_pointer MOVE_0_25   &relative_pointer MOVE_25_0   &mouse_click BTN_RIGHT   &none &none &none &none
-            /* Scroll up / down */
-            &none                           &relative_scroll VERTICAL_-10  &relative_scroll VERTICAL_10  &none                        &none                        &none                    &none &none &none &none
-            /* Unused rows */
-            &none &none &none &none &none &none &none &none &none &none
-            &none &none &none &none &none &none &none &none
+                &mmv MOVE_LEFT   &mmv MOVE_UP    &mkp LCLK    &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp RCLK
+                &none            &msc SCRL_UP    &msc SCRL_DOWN &none         &none            &none
+                &none &none &none &none &none   &none &none &none &none &none
+                                /* thumbs */  &transparent   &transparent  &transparent  &transparent
             >;
         };
     };
