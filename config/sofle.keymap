@@ -1,29 +1,39 @@
-/ {
+/* ---- includes must be first ---- */
+#include <dt-bindings/zmk/pointing.h>
+
+ / {
     compatible = "zmk,keymap";
 
-    #include <dt-bindings/zmk/pointing.h>   /* ← NEW */
-
+    /* layer indexes */
     #define _BASE   0
-    #define _MOUSE  1   /* quick demo layer */
+    #define _MOUSE  1
 
     keymap {
-        base {
+        compatible = "zmk,keymap";
+
+        /* ========== 0 · BASE ========== */
+        base_layer {
+            label = "BASE";
             bindings = <
-                &kp Q  &kp W  &kp E  &kp R  &kp T   &kp Y  &kp U  &kp I  &kp O  &kp P
-                &kp A  &kp S  &kp D  &kp F  &kp G   &kp H  &kp J  &kp K  &kp L  &kp SEMI
-                &kp Z  &kp X  &kp C  &kp V  &kp B   &kp N  &kp M  &kp COMMA &kp DOT &kp SLASH
-                               /* thumbs */ &kp SPACE  &mo _MOUSE   &kp ENTER  &kp BSPC
+            /* Row 1 */ &kp Q  &kp W  &kp E  &kp R  &kp T     &kp Y  &kp U  &kp I  &kp O  &kp P
+            /* Row 2 */ &kp A  &kp S  &kp D  &kp F  &kp G     &kp H  &kp J  &kp K  &kp L  &kp SEMI
+            /* Row 3 */ &kp Z  &kp X  &kp C  &kp V  &kp B     &kp N  &kp M  &kp COMMA &kp DOT &kp SLASH
+            /* Thumb  */              &kp SPACE  &mo _MOUSE   &kp ENTER  &kp BSPC
             >;
         };
 
+        /* ========== 1 · MOUSE ========== */
         mouse_layer {
             label = "MOUSE";
             bindings = <
-                &mmv MOVE_LEFT   &mmv MOVE_UP    &mkp LCLK    &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp RCLK
-                &none            &msc SCRL_UP    &msc SCRL_DOWN &none         &none            &none
-                &none &none &none &none &none   &none &none &none &none &none
-                                /* thumbs */  &transparent   &transparent  &transparent  &transparent
+            /* Row 1: arrow-shaped cursor moves + clicks */
+            &mmv MOVE_LEFT  &mmv MOVE_UP    &mkp LCLK   &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &mkp RCLK    &none &none &none &none
+            /* Row 2: scroll wheel */
+            &none          &msc SCRL_UP     &msc SCRL_DOWN  &none        &none           &none        &none &none &none &none
+            /* rest unused */
+            &none &none &none &none &none   &none &none &none &none &none
+                              /* thumbs */ &transparent &transparent &transparent &transparent
             >;
         };
     };
-};
+ };
